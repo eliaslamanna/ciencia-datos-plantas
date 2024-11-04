@@ -46,7 +46,7 @@ function DropzoneComponent() {
     setResult(`Flor: ${spanishName}`);
 
     try {
-      const response = await fetch('https://api.mercadolibre.com/sites/MLA/search?q=daisy&category=MLA11033');
+      const response = await fetch('https://api.mercadolibre.com/sites/MLA/search?q=' + spanishName + '&category=MLA11033');
       const data = await response.json();
       setItems(data.results);
     } catch (error) {
