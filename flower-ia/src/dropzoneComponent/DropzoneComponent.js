@@ -663,55 +663,59 @@ function DropzoneComponent() {
   return (
     <div style={styles.container}>
       <h3>Seleccioná la imagen de una flor</h3>
-      <div {...getRootProps()} style={styles.dropzone}>
-        <input {...getInputProps()} />
-        {isDragActive ? (
-          <p>Suba una imagen de una flor</p>
-        ) : (
-          <p>Arrastrá o seleccioná un archivo</p>
-        )}
+      <div style={styles.flexContainer}>
+        <div {...getRootProps()} style={styles.dropzone}>
+          <input {...getInputProps()} />
+          {isDragActive ? (
+            <p>Suba una imagen de una flor</p>
+          ) : (
+            <p>Arrastrá o seleccioná un archivo</p>
+          )}
+        </div>
+        <div style={styles.detailsContainer}>
+          {image && (
+            <div style={styles.previewContainer}>
+              <img src={image} alt="Uploaded preview" style={styles.image} />
+              <p style={styles.result}>{result}</p>
+            </div>
+          )}
+          {flowerInfo && (
+            <div style={styles.flowerDetails}>
+              <h4>Detalles de la Flor: {flowerInfo.commonName}</h4>
+              <p><strong>Nombre científico:</strong> {flowerInfo.scientificName}</p>
+              <p><strong>Familia botánica:</strong> {flowerInfo.family}</p>
+              <p><strong>Hábitat natural:</strong> {flowerInfo.habitat}</p>
+              <p><strong>Ciclo de vida:</strong> {flowerInfo.lifeCycle}</p>
+              <p><strong>Altura y tamaño:</strong> {flowerInfo.height}</p>
+              <p><strong>Color de la flor:</strong> {flowerInfo.flowerColor}</p>
+              <p><strong>Época de floración:</strong> {flowerInfo.bloomSeason}</p>
+              <p><strong>Usos:</strong> {flowerInfo.uses}</p>
+              <p><strong>Tasa de crecimiento:</strong> {flowerInfo.growthRate}</p>
+              <p><strong>Requerimientos de luz:</strong> {flowerInfo.lightRequirements}</p>
+              <p><strong>Requerimientos de agua:</strong> {flowerInfo.waterRequirements}</p>
+              <p><strong>Tipo de suelo:</strong> {flowerInfo.soilType}</p>
+              <p><strong>Resistencia a plagas:</strong> {flowerInfo.pestResistance}</p>
+              <p><strong>Toxicidad:</strong> {flowerInfo.toxicity}</p>
+              <p><strong>Propagación:</strong> {flowerInfo.propagation}</p>
+              <p><strong>Significado cultural:</strong> {flowerInfo.culturalSignificance}</p>
+              <p><strong>Estado de conservación:</strong> {flowerInfo.conservationStatus}</p>
+            </div>
+          )}
+          {items.length > 0 && (
+            <div style={styles.resultsContainer}>
+              <h4>Comprar:</h4>
+              <a 
+                href={items[0].permalink} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                style={styles.purchaseLink}
+              >
+                {items[0].title}
+              </a>
+            </div>
+          )}
+        </div>
       </div>
-      {image && (
-        <div style={styles.previewContainer}>
-          <img src={image} alt="Uploaded preview" style={styles.image} />
-          <p style={styles.result}>{result}</p>
-        </div>
-      )}
-      {flowerInfo && (
-        <div style={styles.flowerDetails}>
-          <h4>Detalles de la Flor: {flowerInfo.commonName}</h4>
-          <p><strong>Nombre científico:</strong> {flowerInfo.scientificName}</p>
-          <p><strong>Familia botánica:</strong> {flowerInfo.family}</p>
-          <p><strong>Hábitat natural:</strong> {flowerInfo.habitat}</p>
-          <p><strong>Ciclo de vida:</strong> {flowerInfo.lifeCycle}</p>
-          <p><strong>Altura y tamaño:</strong> {flowerInfo.height}</p>
-          <p><strong>Color de la flor:</strong> {flowerInfo.flowerColor}</p>
-          <p><strong>Época de floración:</strong> {flowerInfo.bloomSeason}</p>
-          <p><strong>Usos:</strong> {flowerInfo.uses}</p>
-          <p><strong>Tasa de crecimiento:</strong> {flowerInfo.growthRate}</p>
-          <p><strong>Requerimientos de luz:</strong> {flowerInfo.lightRequirements}</p>
-          <p><strong>Requerimientos de agua:</strong> {flowerInfo.waterRequirements}</p>
-          <p><strong>Tipo de suelo:</strong> {flowerInfo.soilType}</p>
-          <p><strong>Resistencia a plagas:</strong> {flowerInfo.pestResistance}</p>
-          <p><strong>Toxicidad:</strong> {flowerInfo.toxicity}</p>
-          <p><strong>Propagación:</strong> {flowerInfo.propagation}</p>
-          <p><strong>Significado cultural:</strong> {flowerInfo.culturalSignificance}</p>
-          <p><strong>Estado de conservación:</strong> {flowerInfo.conservationStatus}</p>
-        </div>
-      )}
-      {items.length > 0 && (
-        <div style={styles.resultsContainer}>
-          <h4>Comprar:</h4>
-          <a 
-            href={items[0].permalink} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            style={styles.purchaseLink}
-          >
-            {items[0].title}
-          </a>
-        </div>
-      )}
     </div>
   );
 }
@@ -723,15 +727,25 @@ const styles = {
     alignItems: 'center',
     padding: '20px',
   },
+  flexContainer: {
+    display: 'flex',
+    width: '100%',
+    maxWidth: '800px', // Adjust as needed
+  },
   dropzone: {
     border: '2px dashed #cccccc',
     borderRadius: '4px',
     padding: '20px',
-    width: '100%',
-    maxWidth: '400px',
+    width: '50%', // Set width to 50% to fit side by side
     textAlign: 'center',
     cursor: 'pointer',
-    marginBottom: '20px',
+    marginRight: '20px', // Add some spacing to the right
+    height: '200px', // Set a fixed height for the dropzone
+    overflow: 'hidden', // Hide any overflow to prevent extension
+  },
+  detailsContainer: {
+    width: '50%', // Set width to 50% for the details
+    padding: '20px', // Add padding to the details container
   },
   previewContainer: {
     marginTop: '20px',
@@ -749,7 +763,6 @@ const styles = {
   flowerDetails: {
     marginTop: '20px',
     textAlign: 'left',
-    maxWidth: '400px',
     border: '1px solid #ccc',
     padding: '10px',
     borderRadius: '5px',
