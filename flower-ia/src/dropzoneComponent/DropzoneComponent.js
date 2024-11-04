@@ -1,6 +1,30 @@
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
+const flowerMapping = {
+  "Tulips": "Tulipanes",
+  "Orchids": "Orquídeas",
+  "Peonies": "Peonías",
+  "Hydrangeas": "Hortensias",
+  "Lilies": "Lirios",
+  "Gardenias": "Gardenias",
+  "Roses": "Rosas",
+  "Daisy": "Margarita",
+  "Hibiscus": "Hibisco",
+  "Bougainvillea": "Buganvilla / Santa Rita",
+  "Sunflower": "Girasol",
+  "Lotus": "Loto",
+  "Dandelion": "Diente de león",
+  "Bellflower": "Campánula",
+  "Astilbe": "Astilbe",
+  "Black-Eyed Susan": "Susana de ojos negros / Rudbeckia",
+  "Calendula": "Caléndula",
+  "California Poppy": "Amapola de California",
+  "Carnation": "Clavel",
+  "Coreopsis": "Coreopsis",
+  "Iris": "Iris"
+};
+
 function DropzoneComponent() {
   const [image, setImage] = useState(null);
   const [result, setResult] = useState(null);
@@ -15,14 +39,16 @@ function DropzoneComponent() {
   }, []);
 
   const procesarImagen = async () => {
-    // Aquí puedes agregar la lógica de procesamiento de la imagen si es necesario
-    setResult("Flor: Rosa");
+  
+    const flowerName = "Daisy"; // Replace
+    const spanishName = flowerMapping[flowerName] || "Desconocida";
 
-    // Llamar al endpoint de Mercado Libre
+    setResult(`Flor: ${spanishName}`);
+
     try {
       const response = await fetch('https://api.mercadolibre.com/sites/MLA/search?q=daisy&category=MLA11033');
       const data = await response.json();
-      setItems(data.results); // Almacenar los resultados
+      setItems(data.results);
     } catch (error) {
       console.error("Error fetching data from Mercado Libre:", error);
     }
