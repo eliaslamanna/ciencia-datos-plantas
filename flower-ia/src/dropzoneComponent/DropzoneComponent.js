@@ -639,7 +639,7 @@ function DropzoneComponent() {
   }, []);
 
   const procesarImagen = async () => {
-    const flowerName = "Roses"; // Replace with actual flower identification logic
+    const flowerName = "rose"; // Replace with actual flower identification logic
     const spanishName = flowerMapping[flowerName] || "Desconocida";
     setResult(`Flor: ${spanishName}`);
 
