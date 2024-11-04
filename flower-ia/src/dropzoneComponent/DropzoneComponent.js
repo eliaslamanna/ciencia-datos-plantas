@@ -633,25 +633,51 @@ function DropzoneComponent() {
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
     if (file) {
-      setImage(URL.createObjectURL(file));
-      procesarImagen();  // Process the image to determine the flower.
+      const imgUrl = URL.createObjectURL(file);
+      setImage(imgUrl);
+      procesarImagen(imgUrl); // Pass the imgUrl instead of file
     }
   }, []);
 
-  const procesarImagen = async () => {
-    const flowerName = "rose"; // Replace with actual flower identification logic
-    const spanishName = flowerMapping[flowerName] || "Desconocida";
-    setResult(`Flor: ${spanishName}`);
+  const procesarImagen = async (imgUrl) => {
+    const img = new Image();
+    img.src = imgUrl;
 
-    const selectedFlower = flowerDetails.find(detail => detail.commonName === flowerMapping[flowerName]);
-    setFlowerInfo(selectedFlower);
+    img.onload = async () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+  
+      const imageData = ctx.getImageData(0, 0, img.width, img.height);
+      const { width, height } = imageData;
+      const numberOfPixels = width * height; // Total de píxeles
+      const numberOfChannels = imageData.data.length / numberOfPixels; // Número de canales
+  
+      // Verifica si tiene 3 canales
+      if (numberOfChannels === 4) {
+        console.log(`La imagen tiene ${numberOfPixels} píxeles y ${numberOfChannels} canales (RGBA).`);
+      } else if (numberOfChannels === 3) {
+        console.log(`La imagen tiene ${numberOfPixels} píxeles y ${numberOfChannels} canales (RGB).`);
+      } else {
+        console.log(`La imagen tiene ${numberOfPixels} píxeles y ${numberOfChannels} canales.`);
+      }
 
-    try {
-      const response = await fetch('https://api.mercadolibre.com/sites/MLA/search?q=' + spanishName + '&category=MLA11033');
-      const data = await response.json();
-      setItems(data.results);
-    } catch (error) {
-      console.error("Error fetching data from Mercado Libre:", error);
+      const flowerName = "rose"; // Replace with actual flower identification logic
+      const spanishName = flowerMapping[flowerName] || "Desconocida";
+      setResult(`Flor: ${spanishName}`);
+
+      const selectedFlower = flowerDetails.find(detail => detail.commonName === flowerMapping[flowerName]);
+      setFlowerInfo(selectedFlower);
+
+      try {
+        const response = await fetch('https://api.mercadolibre.com/sites/MLA/search?q=' + spanishName + '&category=MLA11033');
+        const data = await response.json();
+        setItems(data.results);
+      } catch (error) {
+        console.error("Error fetching data from Mercado Libre:", error);
+      }
     }
   };
 
