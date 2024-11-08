@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import HighlightedCountriesMap from '../highlightedCountriesMap/HighlightedCountriesMap';
 
 const flowerMapping = {
   "tulip": "Tulipanes",
@@ -8,7 +9,7 @@ const flowerMapping = {
   "Hydrangeas": "Hortensias",
   "Lilies": "Lirios",
   "Gardenias": "Gardenias",
-  "rose": "Rosas",
+  "rose": "Rosa",
   "common_daisy": "Margarita",
   "Hibiscus": "Hibisco",
   "Bougainvillea": "Buganvilla",
@@ -53,7 +54,8 @@ const flowerDetails = [
     propagation: "Semillas y bulbos.",
     culturalSignificance: "Símbolo de amor y primavera.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "Netherlands, Turkey, Iran, Kazakhstan, Uzbekistan, Turkmenistan"
   },
   {
     commonName: "Orquídeas",
@@ -74,7 +76,8 @@ const flowerDetails = [
     propagation: "Semillas, esquejes.",
     culturalSignificance: "Símbolo de belleza y fuerza.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Algunas especies en peligro."
+    conservationStatus: "Algunas especies en peligro.",
+    countries: "Brazil, Colombia, Ecuador, Philippines, Thailand, Indonesia, Malaysia, Australia, India"
   },
   {
     commonName: "Peonías",
@@ -95,7 +98,8 @@ const flowerDetails = [
     propagation: "Semillas, división.",
     culturalSignificance: "Símbolo de riqueza y honor.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Canada, China, Japan, Russia, Korea, France, Italy"
   },
   {
     commonName: "Hortensias",
@@ -116,7 +120,8 @@ const flowerDetails = [
     propagation: "Esquejes.",
     culturalSignificance: "Símbolo de gracia y belleza.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "Japan, Korea, United States of America, China, Taiwan, United Kingdom, France"
   },
   {
     commonName: "Lirios",
@@ -137,7 +142,8 @@ const flowerDetails = [
     propagation: "Bulbos.",
     culturalSignificance: "Pureza y renovación.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Canada, China, Japan, South Korea, Italy, Netherlands"
   },
   {
     commonName: "Gardenias",
@@ -158,10 +164,11 @@ const flowerDetails = [
     propagation: "Esquejes.",
     culturalSignificance: "Pureza y amor.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Brazil, South Africa, Australia, India, China, Philippines"
   },
   {
-    commonName: "Rosas",
+    commonName: "Rosa",
     scientificName: "Rosa",
     family: "Rosaceae",
     habitat: "Regiones templadas.",
@@ -179,7 +186,8 @@ const flowerDetails = [
     propagation: "Esquejes, injertos.",
     culturalSignificance: "Amor y pasión.",
     activeComponents: "Aceites esenciales.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Turkey, China, France, Japan, United Kingdom, India, Italy"
   },
   {
     commonName: "Margarita",
@@ -200,7 +208,8 @@ const flowerDetails = [
     propagation: "Semillas.",
     culturalSignificance: "Inocencia y pureza.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Canada, United Kingdom, Germany, France, Netherlands, Japan"
   },
   {
     commonName: "Hibisco",
@@ -221,7 +230,8 @@ const flowerDetails = [
     propagation: "Esquejes y semillas.",
     culturalSignificance: "Símbolo de belleza y juventud, a menudo asociado con la cultura hawaiana.",
     activeComponents: "Antioxidantes, se utiliza en la medicina herbal.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Mexico, India, Philippines, Thailand, Caribbean, Malaysia, Australia, Egypt"
   },
   {
     commonName: "Buganvilla",
@@ -242,7 +252,8 @@ const flowerDetails = [
     propagation: "Esquejes.",
     culturalSignificance: "Símbolo de pasión y alegría.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "Brazil, Argentina, India, Indonesia, Philippines, Thailand, Mexico, Australia"
   },
   {
     commonName: "Girasol",
@@ -263,7 +274,8 @@ const flowerDetails = [
     propagation: "Semillas.",
     culturalSignificance: "Símbolo de adoración y lealtad.",
     activeComponents: "Aceite de girasol.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Russia, Ukraine, Argentina, China, India, France, Canada, Italy, Spain"
   },
   {
     commonName: "Loto",
@@ -284,7 +296,8 @@ const flowerDetails = [
     propagation: "Semillas y rizomas.",
     culturalSignificance: "Símbolo de pureza y belleza en varias culturas.",
     activeComponents: "Antioxidantes y compuestos antiinflamatorios.",
-    conservationStatus: "Algunas especies están amenazadas."
+    conservationStatus: "Algunas especies están amenazadas.",
+    countries: "India, China, Japan, Thailand, Vietnam, Egypt, Cambodia, Myanmar"
   },
   {
     commonName: "Diente de león",
@@ -305,7 +318,8 @@ const flowerDetails = [
     propagation: "Semillas.",
     culturalSignificance: "Asociado con la resiliencia y la transformación.",
     activeComponents: "Vitaminas A, C y K, y minerales.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Canada, United Kingdom, Germany, France, Russia, China"
   },
   {
     commonName: "Campánula",
@@ -326,7 +340,8 @@ const flowerDetails = [
     propagation: "Semillas y división de raíces.",
     culturalSignificance: "Simboliza la gratitud.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Canada, United Kingdom, Germany, France, Italy, Japan"
   },
   {
     commonName: "Astilbe",
@@ -347,7 +362,8 @@ const flowerDetails = [
     propagation: "División de raíces.",
     culturalSignificance: "A menudo utilizada en jardines de sombra.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Canada, Japan, Korea, China, Russia"
   },
   {
     commonName: "Susana de ojos negros",
@@ -368,7 +384,8 @@ const flowerDetails = [
     propagation: "Semillas.",
     culturalSignificance: "Simboliza la belleza silvestre.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Canada, Mexico"
   },
   {
     commonName: "Caléndula",
@@ -389,7 +406,8 @@ const flowerDetails = [
     propagation: "Semillas.",
     culturalSignificance: "Asociada con la alegría y la protección.",
     activeComponents: "Flavonoides, carotenoides.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Mexico, Spain, India, Morocco, Italy, France, Turkey"
   },
   {
     commonName: "Amapola de California",
@@ -410,7 +428,8 @@ const flowerDetails = [
     propagation: "Semillas.",
     culturalSignificance: "Flor estatal de California, simboliza la belleza natural.",
     activeComponents: "Alcaloides, que pueden tener efectos calmantes.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Mexico, Canada"
   },
   {
     commonName: "Clavel",
@@ -431,7 +450,8 @@ const flowerDetails = [
     propagation: "Semillas, esquejes.",
     culturalSignificance: "Simboliza amor y fascinación.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "Spain, Italy, United States of America, Netherlands, China, India, Turkey"
   },
   {
     commonName: "Coreopsis",
@@ -452,7 +472,8 @@ const flowerDetails = [
     propagation: "Semillas y división de raíces.",
     culturalSignificance: "Asociada con la belleza silvestre.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Canada, Mexico"
   },
   {
     commonName: "Iris",
@@ -473,7 +494,8 @@ const flowerDetails = [
     propagation: "Rizomas.",
     culturalSignificance: "Simboliza fe y esperanza.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Canada, Japan, China, India, Russia, France, Netherlands"
   },
   {
     commonName: "Narciso",
@@ -494,7 +516,8 @@ const flowerDetails = [
     propagation: "Semillas y bulbos.",
     culturalSignificance: "Símbolo de amor y renacimiento.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, United Kingdom, Netherlands, Germany, Italy, Spain, France"
   },
   {
     commonName: "Geranio",
@@ -515,7 +538,8 @@ const flowerDetails = [
     propagation: "Esquejes y semillas.",
     culturalSignificance: "Símbolo de amistad y devoción.",
     activeComponents: "Aceites esenciales.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, South Africa, United Kingdom, Spain, Germany, Australia"
   },
   {
     commonName: "Jacinto",
@@ -536,7 +560,8 @@ const flowerDetails = [
     propagation: "Bulbos.",
     culturalSignificance: "Símbolo de belleza y renovación.",
     activeComponents: "Alcaloides.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Netherlands, France, Germany, Turkey, Egypt"
   },
   {
     commonName: "Magnolia",
@@ -557,7 +582,8 @@ const flowerDetails = [
     propagation: "Esquejes y semillas.",
     culturalSignificance: "Símbolo de dignidad y nobleza.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, China, Japan, Korea, India, Malaysia"
   },
   {
     commonName: "Primavera",
@@ -578,7 +604,8 @@ const flowerDetails = [
     propagation: "Esquejes.",
     culturalSignificance: "Símbolo de alegría y celebración.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, United Kingdom, Japan, China, South Korea, Canada"
   },
   {
     commonName: "Verbena",
@@ -599,7 +626,8 @@ const flowerDetails = [
     propagation: "Semillas y esquejes.",
     culturalSignificance: "Símbolo de protección y amor.",
     activeComponents: "Ácidos fenólicos.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Mexico, Brazil, Spain, Argentina, Italy, France"
   },
   {
     commonName: "Nenúfar",
@@ -620,22 +648,45 @@ const flowerDetails = [
     propagation: "Semillas y rizomas.",
     culturalSignificance: "Símbolo de pureza y tranquilidad.",
     activeComponents: "No aplicable.",
-    conservationStatus: "Común."
+    conservationStatus: "Común.",
+    countries: "United States of America, Canada, Brazil, India, Egypt, China, Australia, Thailand"
+  },
+  {
+    commonName: "Jazmín",
+    scientificName: "Jasminum",
+    family: "Oleaceae",
+    habitat: "Regiones tropicales y subtropicales de Asia, Europa y África.",
+    lifeCycle: "Perenne.",
+    height: "Varía según la especie, puede alcanzar hasta 3-5 metros.",
+    flowerColor: "Blanco, amarillo, rosa, morado, dependiendo de la especie.",
+    bloomSeason: "Primavera a verano.",
+    uses: "Ornamental, medicinal, cosmético (aceite esencial), aromático.",
+    growthRate: "Rápida.",
+    lightRequirements: "Pleno sol a sombra parcial.",
+    waterRequirements: "Moderado, no tolera encharcamientos.",
+    soilType: "Bien drenado, ligeramente ácido a neutro.",
+    pestResistance: "Baja (puede ser susceptible a plagas como áfidos).",
+    toxicity: "No tóxica.",
+    propagation: "Esquejes, acodo, y semillas.",
+    culturalSignificance: "Símbolo de amor y belleza en varias culturas, usado en perfumes y aromaterapia.",
+    activeComponents: "Aceites esenciales, flavonoides, compuestos fenólicos.",
+    conservationStatus: "Común, algunas especies están en peligro debido a la destrucción del hábitat.",
+    countries: "India, China, Egypt, Pakistan, Thailand, Indonesia, Philippines, Morocco"
   }
 ];
 
 function DropzoneComponent() {
   const [image, setImage] = useState(null);
   const [result, setResult] = useState(null);
-  const [items, setItems] = useState([]);
   const [flowerInfo, setFlowerInfo] = useState(null);
+  const [mercadoLibreUrl, setMercadoLibreUrl] = useState('');
 
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
     if (file) {
       const imgUrl = URL.createObjectURL(file);
       setImage(imgUrl);
-      procesarImagen(imgUrl); // Pass the imgUrl instead of file
+      procesarImagen(imgUrl);
     }
   }, []);
 
@@ -664,21 +715,16 @@ function DropzoneComponent() {
         console.log(`La imagen tiene ${numberOfPixels} píxeles y ${numberOfChannels} canales.`);
       }
 
-      const flowerName = "rose"; // Replace with actual flower identification logic
+      const flowerName = "rose"; // reemplazar con nombre procesado
       const spanishName = flowerMapping[flowerName] || "Desconocida";
       setResult(`Flor: ${spanishName}`);
 
       const selectedFlower = flowerDetails.find(detail => detail.commonName === flowerMapping[flowerName]);
       setFlowerInfo(selectedFlower);
 
-      try {
-        const response = await fetch('https://api.mercadolibre.com.ar/' + spanishName + '?category=MLA11033');
-        const data = await response.json();
-        setItems(data.results);
-      } catch (error) {
-        console.error("Error fetching data from Mercado Libre:", error);
-      }
-    }
+      const mercadoLibreUrl = 'https://listado.mercadolibre.com.ar/' + spanishName + '?category=MLA11033';
+      setMercadoLibreUrl(mercadoLibreUrl);
+    };
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -727,18 +773,22 @@ function DropzoneComponent() {
               <p><strong>Estado de conservación:</strong> {flowerInfo.conservationStatus}</p>
             </div>
           )}
-          {items.length > 0 && (
+          {mercadoLibreUrl && (
             <div style={styles.resultsContainer}>
-              <h4>Comprar:</h4>
+              <h4>Comprar en MercadoLibre:</h4>
               <a 
-                href={items[0].permalink} 
+                href={mercadoLibreUrl} 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 style={styles.purchaseLink}
               >
-                {items[0].title}
+                Ver listado de {result}
               </a>
             </div>
+          )}
+          {/* Pass flowerInfo.countries to HighlightedCountriesMap */}
+          {flowerInfo && flowerInfo.countries && (
+            <HighlightedCountriesMap countries={flowerInfo.countries} />
           )}
         </div>
       </div>
@@ -749,29 +799,31 @@ function DropzoneComponent() {
 const styles = {
   container: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column',  // Stack all components vertically
     alignItems: 'center',
     padding: '20px',
   },
   flexContainer: {
     display: 'flex',
+    flexDirection: 'column',  // Stack dropzone and details vertically
     width: '100%',
-    maxWidth: '800px', // Adjust as needed
+    maxWidth: '800px',
+    alignItems: 'flex-start',  // Align left
   },
   dropzone: {
     border: '2px dashed #cccccc',
     borderRadius: '4px',
     padding: '20px',
-    width: '50%', // Set width to 50% to fit side by side
+    width: '100%',  // Full width for the dropzone
     textAlign: 'center',
     cursor: 'pointer',
-    marginRight: '20px', // Add some spacing to the right
-    height: '200px', // Set a fixed height for the dropzone
-    overflow: 'hidden', // Hide any overflow to prevent extension
+    marginBottom: '20px', // Space between dropzone and content
+    height: '200px', // Fixed height for the dropzone
+    overflow: 'hidden',
   },
   detailsContainer: {
-    width: '50%', // Set width to 50% for the details
-    padding: '20px', // Add padding to the details container
+    width: '100%', // Ensure full width for the details container
+    padding: '20px',
   },
   previewContainer: {
     marginTop: '20px',
@@ -802,5 +854,6 @@ const styles = {
     textDecoration: 'underline',
   },
 };
+
 
 export default DropzoneComponent;
