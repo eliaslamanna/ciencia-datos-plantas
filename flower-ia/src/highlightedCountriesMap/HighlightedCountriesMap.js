@@ -15,7 +15,7 @@ const HighlightedCountriesMap = ({ countries }) => {
 
   return (
     <div>
-      <h4>Mapa de los países de origen:</h4>
+      <h4 style={styles.header}>Mapa de los países de origen:</h4>
       <ComposableMap projection="geoMercator" width={800} height={600}>
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
@@ -39,6 +39,18 @@ const HighlightedCountriesMap = ({ countries }) => {
       </ComposableMap>
     </div>
   );
+};
+
+const styles = {
+  header: {
+    fontSize: '24px',
+    color: '#00796b',
+    textAlign: 'center',
+    marginBottom: '20px',
+    textDecoration: 'underline',
+    fontWeight: '600',
+    fontFamily: "'Poppins', sans-serif",
+  },
 };
 
 export default HighlightedCountriesMap;

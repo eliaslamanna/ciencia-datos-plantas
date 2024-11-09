@@ -4,12 +4,12 @@ import { Button } from '@mui/material';
 import HighlightedCountriesMap from '../highlightedCountriesMap/HighlightedCountriesMap';
 
 const flowerMapping = {
-  "tulip": "Tulipanes",
-  "orchid": "Orquídeas",
+  "tulip": "Tulipan",
+  "orchid": "Orquídea",
   "Peonies": "Peonías",
-  "Hydrangeas": "Hortensias",
-  "Lilies": "Lirios",
-  "Gardenias": "Gardenias",
+  "Hydrangeas": "Hortensia",
+  "Lilies": "Lirio",
+  "Gardenias": "Gardenia",
   "rose": "Rosa",
   "common_daisy": "Margarita",
   "Hibiscus": "Hibisco",
@@ -37,7 +37,7 @@ const flowerMapping = {
 
 const flowerDetails = [
   {
-    commonName: "Tulipanes",
+    commonName: "Tulipan",
     scientificName: "Tulipa",
     family: "Liliaceae",
     habitat: "Regiones templadas de Europa y Asia.",
@@ -59,7 +59,7 @@ const flowerDetails = [
     countries: "Netherlands, Turkey, Iran, Kazakhstan, Uzbekistan, Turkmenistan"
   },
   {
-    commonName: "Orquídeas",
+    commonName: "Orquídea",
     scientificName: "Orchidaceae",
     family: "Orchidaceae",
     habitat: "Tropical y subtropical.",
@@ -103,7 +103,7 @@ const flowerDetails = [
     countries: "United States of America, Canada, China, Japan, Russia, Korea, France, Italy"
   },
   {
-    commonName: "Hortensias",
+    commonName: "Hortensia",
     scientificName: "Hydrangea",
     family: "Hydrangeaceae",
     habitat: "Regiones templadas.",
@@ -125,7 +125,7 @@ const flowerDetails = [
     countries: "Japan, Korea, United States of America, China, Taiwan, United Kingdom, France"
   },
   {
-    commonName: "Lirios",
+    commonName: "Lirio",
     scientificName: "Lilium",
     family: "Liliaceae",
     habitat: "Regiones templadas.",
@@ -147,7 +147,7 @@ const flowerDetails = [
     countries: "United States of America, Canada, China, Japan, South Korea, Italy, Netherlands"
   },
   {
-    commonName: "Gardenias",
+    commonName: "Gardenia",
     scientificName: "Gardenia jasminoides",
     family: "Rubiaceae",
     habitat: "Regiones tropicales y subtropicales.",
@@ -718,7 +718,7 @@ function DropzoneComponent() {
 
       const flowerName = "tulip"; // reemplazar con nombre procesado
       const spanishName = flowerMapping[flowerName] || "Desconocida";
-      setResult(`Flor: ${spanishName}`);
+      setResult(`${spanishName}`);
 
       const selectedFlower = flowerDetails.find(detail => detail.commonName === flowerMapping[flowerName]);
       setFlowerInfo(selectedFlower);
@@ -735,7 +735,7 @@ function DropzoneComponent() {
 
   return (
     <div style={styles.container}>
-      <h3>Seleccioná la imagen de una flor</h3>
+      <h3 style={styles.mainText}>Seleccioná la imagen de una flor</h3>
       <div style={styles.flexContainer}>
         <div {...getRootProps()} style={styles.dropzone}>
           <input {...getInputProps()} />
@@ -776,7 +776,7 @@ function DropzoneComponent() {
           )}
           {mercadoLibreUrl && (
             <div style={styles.resultsContainer}>
-              <h4>Comprar en MercadoLibre:</h4>
+              <h2>Comprar en MercadoLibre:</h2>
               <Button 
                 variant="contained" 
                 color="primary" 
@@ -788,7 +788,6 @@ function DropzoneComponent() {
               </Button>
             </div>
           )}
-          {/* Pass flowerInfo.countries to HighlightedCountriesMap */}
           {flowerInfo && flowerInfo.countries && (
             <HighlightedCountriesMap countries={flowerInfo.countries} />
           )}
@@ -846,9 +845,10 @@ const styles = {
   },
   result: {
     marginTop: '10px',
-    fontSize: '18px',
+    fontSize: '30px',
     fontWeight: 'bold',
     color: '#333',
+    textDecoration: 'underline'
   },
   flowerDetails: {
     marginTop: '20px',
@@ -872,6 +872,15 @@ const styles = {
     fontWeight: 'bold',
     transition: 'background-color 0.3s',
     boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+  },
+  mainText: {
+    fontSize: '24px',
+    color: '#1f2121',
+    textAlign: 'center',
+    marginBottom: '20px',
+    textDecoration: 'underline',
+    fontWeight: '600',
+    fontFamily: "'Poppins', sans-serif",
   },
 };
 
