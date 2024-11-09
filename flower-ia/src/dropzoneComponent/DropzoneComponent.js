@@ -754,7 +754,7 @@ function DropzoneComponent() {
           )}
           {flowerInfo && (
             <div style={styles.flowerDetails}>
-              <h4>Detalles de la Flor: {flowerInfo.commonName}</h4>
+              <h4 style={{ textDecoration: 'underline' }}>Detalles de la Flor: {flowerInfo.commonName}</h4>
               <p><strong>Nombre científico:</strong> {flowerInfo.scientificName}</p>
               <p><strong>Familia botánica:</strong> {flowerInfo.family}</p>
               <p><strong>Hábitat natural:</strong> {flowerInfo.habitat}</p>
