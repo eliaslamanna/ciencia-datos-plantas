@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { Button } from '@mui/material';
 import HighlightedCountriesMap from '../highlightedCountriesMap/HighlightedCountriesMap';
 
 const flowerMapping = {
@@ -715,7 +716,7 @@ function DropzoneComponent() {
         console.log(`La imagen tiene ${numberOfPixels} píxeles y ${numberOfChannels} canales.`);
       }
 
-      const flowerName = "rose"; // reemplazar con nombre procesado
+      const flowerName = "tulip"; // reemplazar con nombre procesado
       const spanishName = flowerMapping[flowerName] || "Desconocida";
       setResult(`Flor: ${spanishName}`);
 
@@ -776,14 +777,15 @@ function DropzoneComponent() {
           {mercadoLibreUrl && (
             <div style={styles.resultsContainer}>
               <h4>Comprar en MercadoLibre:</h4>
-              <a 
+              <Button 
+                variant="contained" 
+                color="primary" 
                 href={mercadoLibreUrl} 
                 target="_blank" 
-                rel="noopener noreferrer" 
-                style={styles.purchaseLink}
+                rel="noopener noreferrer"
               >
                 Ver listado de {result}
-              </a>
+              </Button>
             </div>
           )}
           {/* Pass flowerInfo.countries to HighlightedCountriesMap */}
@@ -799,30 +801,37 @@ function DropzoneComponent() {
 const styles = {
   container: {
     display: 'flex',
-    flexDirection: 'column',  // Stack all components vertically
+    flexDirection: 'column',
     alignItems: 'center',
     padding: '20px',
+    minHeight: '100vh',
+    background: 'linear-gradient(135deg, #e0f7fa, #fff3e0)',
   },
   flexContainer: {
     display: 'flex',
-    flexDirection: 'column',  // Stack dropzone and details vertically
+    flexDirection: 'column',
     width: '100%',
     maxWidth: '800px',
-    alignItems: 'flex-start',  // Align left
+    alignItems: 'flex-start',
+    backgroundColor: '#ffffff',
+    padding: '50px',
+    borderRadius: '8px',
+    boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
   },
   dropzone: {
     border: '2px dashed #cccccc',
     borderRadius: '4px',
     padding: '20px',
-    width: '100%',  // Full width for the dropzone
+    width: '95%',
     textAlign: 'center',
     cursor: 'pointer',
-    marginBottom: '20px', // Space between dropzone and content
-    height: '200px', // Fixed height for the dropzone
+    marginBottom: '20px',
+    height: '200px',
     overflow: 'hidden',
+    backgroundColor: '#fafafa',
   },
   detailsContainer: {
-    width: '100%', // Ensure full width for the details container
+    width: '100%',
     padding: '20px',
   },
   previewContainer: {
@@ -832,26 +841,37 @@ const styles = {
   image: {
     maxWidth: '100%',
     maxHeight: '300px',
+    borderRadius: '8px',
+    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
   },
   result: {
     marginTop: '10px',
     fontSize: '18px',
     fontWeight: 'bold',
+    color: '#333',
   },
   flowerDetails: {
     marginTop: '20px',
     textAlign: 'left',
-    border: '1px solid #ccc',
     padding: '10px',
     borderRadius: '5px',
+    backgroundColor: '#f9f9f9',
   },
   resultsContainer: {
     marginTop: '20px',
     textAlign: 'center',
   },
-  purchaseLink: {
-    color: '#007bff',
-    textDecoration: 'underline',
+  purchaseButton: {
+    backgroundColor: '#007bff',
+    color: 'white',
+    padding: '10px 15px',
+    borderRadius: '4px',
+    border: 'none',
+    cursor: 'pointer',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    transition: 'background-color 0.3s',
+    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
   },
 };
 
