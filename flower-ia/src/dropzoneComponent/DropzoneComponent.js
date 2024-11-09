@@ -733,6 +733,14 @@ function DropzoneComponent() {
     accept: 'image/*',
   });
 
+  const renderCountries = (countries) => {
+    if (!countries) return null;
+    const countryList = countries.split(',').map((country, index) => (
+      <li key={index} style={styles.countryList}>{country.trim()}</li>
+    ));
+    return <ul>{countryList}</ul>;
+  };
+
   return (
     <div style={styles.container}>
       <h3 style={styles.mainText}>Seleccioná la imagen de una flor</h3>
@@ -791,6 +799,11 @@ function DropzoneComponent() {
           {flowerInfo && flowerInfo.countries && (
             <HighlightedCountriesMap countries={flowerInfo.countries} />
           )}
+          {flowerInfo && flowerInfo.countries && (
+            <div style={styles.countriesContainer}>
+              {renderCountries(flowerInfo.countries)}
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -798,6 +811,27 @@ function DropzoneComponent() {
 }
 
 const styles = {
+  countriesContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    fontFamily: "'Roboto', sans-serif",
+  },
+  countriesHeader: {
+    fontWeight: 'bold',
+    fontSize: '22px',
+    marginBottom: '15px',
+    textDecoration: 'underline',
+    color: '#333',
+  },
+  countryList: {
+    listStyleType: 'disc',
+    fontSize: '20px',
+    fontWeight: 'bold',
+    color: '#555',
+    textAlign: 'center',
+    paddingRight: '50px',
+  },
   container: {
     display: 'flex',
     flexDirection: 'column',
