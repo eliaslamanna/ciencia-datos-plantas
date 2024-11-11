@@ -32,7 +32,7 @@ const flowerMapping = {
   "magnolia": "Magnolia",
   "primrose": "Primavera",
   "verbena": "Verbena",
-  "water_lily": "Nenúfar"
+  "water_lilly": "Nenúfar"
 };
 
 const flowerDetails = [
