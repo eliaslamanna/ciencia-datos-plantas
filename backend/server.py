@@ -35,7 +35,7 @@ async def mi_endpoint():
 
 # Cargar el modelo previamente entrenado
 # model = load_model(r"G:\Mi unidad\Facultad\2024\2do cuatrimestre\Ciencia de datos\TPO\model.keras")
-model = load_model(r"C:\Users\Franco Ramponi\OneDrive\Documentos\GitHub\ciencia-datos-plantas\backend\model.keras")
+model = load_model(r"C:\Users\Elias\Downloads\model.keras")
 
 # Define las clases
 class_names = ["astilbe", "bellflower", "black_eyed_susan", "calendula", "california_poppy", "carnation", "common_daisy", "coreopsis", "daffodil", "dandelion", "geranium", "hyacinth", "iris", "jasmine", "lotus", "magnolia", "orchid", "primrose", "rose", "sunflower", "tulip", "verbena", "water_lilly"]
@@ -53,7 +53,7 @@ def predict_image(img):
     try:
         predictions = model.predict(img_array)
         predicted_class = class_names[np.argmax(predictions)]
-        confidence = np.max(predictions)
+        confidence = float(np.max(predictions))  # Convert confidence to float
         return predicted_class, confidence
     except Exception as e:
         print("Error during prediction:", e)
