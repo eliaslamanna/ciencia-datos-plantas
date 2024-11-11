@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <body>
-        <h1>Flower IA</h1>
+        <h1>Blossom IA</h1>
         <DropzoneComponent />
       </body>
     </div>

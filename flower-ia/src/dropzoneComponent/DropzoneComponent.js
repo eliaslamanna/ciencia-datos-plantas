@@ -701,12 +701,12 @@ function DropzoneComponent() {
       canvas.height = img.height;
       const ctx = canvas.getContext('2d');
       ctx.drawImage(img, 0, 0);
-  
+
       const imageData = ctx.getImageData(0, 0, img.width, img.height);
       const { width, height } = imageData;
       const numberOfPixels = width * height; // Total de píxeles
       const numberOfChannels = imageData.data.length / numberOfPixels; // Número de canales
-  
+
       // Convert the image data to a Blob for sending as FormData
       const response = await fetch(imgUrl);
       const blob = await response.blob();
@@ -714,28 +714,28 @@ function DropzoneComponent() {
       formData.append("file", blob, "image.jpg");
 
       try {
-      // Call the FastAPI endpoint
-      const apiResponse = await fetch("http://127.0.0.1:8000/predict", {
-        method: "POST",
-        body: formData,
-      });
-      const data = await apiResponse.json();
+        // Call the FastAPI endpoint
+        const apiResponse = await fetch("http://127.0.0.1:8000/predict", {
+          method: "POST",
+          body: formData,
+        });
+        const data = await apiResponse.json();
 
-      // Replace the hardcoded "tulip" with the class from the API response
-      const flowerName = data.class;
-      const spanishName = flowerMapping[flowerName] || "Desconocida";
-      setResult(spanishName);
+        // Replace the hardcoded "tulip" with the class from the API response
+        const flowerName = data.class;
+        const spanishName = flowerMapping[flowerName] || "Desconocida";
+        setResult(spanishName);
 
-      const selectedFlower = flowerDetails.find(
-        detail => detail.commonName === flowerMapping[flowerName]
-      );
-      setFlowerInfo(selectedFlower);
+        const selectedFlower = flowerDetails.find(
+          detail => detail.commonName === flowerMapping[flowerName]
+        );
+        setFlowerInfo(selectedFlower);
 
-      const mercadoLibreUrl = 'https://listado.mercadolibre.com.ar/' + spanishName + '?category=MLA11033';
-      setMercadoLibreUrl(mercadoLibreUrl);
-    } catch (error) {
-      console.error("Error calling API:", error);
-    }
+        const mercadoLibreUrl = 'https://listado.mercadolibre.com.ar/' + spanishName + '?category=MLA11033';
+        setMercadoLibreUrl(mercadoLibreUrl);
+      } catch (error) {
+        console.error("Error calling API:", error);
+      }
     };
   };
 
@@ -754,7 +754,7 @@ function DropzoneComponent() {
 
   return (
     <div style={styles.container}>
-      <h3 style={styles.mainText}>Seleccioná la imagen de una flor</h3>
+      <h3 style={styles.mainText}>Insertá una imagen de una flor</h3>
       <div style={styles.flexContainer}>
         <div {...getRootProps()} style={styles.dropzone}>
           <input {...getInputProps()} />
@@ -796,11 +796,11 @@ function DropzoneComponent() {
           {mercadoLibreUrl && (
             <div style={styles.resultsContainer}>
               <h2>Comprar en MercadoLibre:</h2>
-              <Button 
-                variant="contained" 
-                color="primary" 
-                href={mercadoLibreUrl} 
-                target="_blank" 
+              <Button
+                variant="contained"
+                color="primary"
+                href={mercadoLibreUrl}
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 Ver listado de {result}
