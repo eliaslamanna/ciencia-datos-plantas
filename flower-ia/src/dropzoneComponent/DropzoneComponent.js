@@ -731,7 +731,7 @@ function DropzoneComponent() {
         );
         setFlowerInfo(selectedFlower);
 
-        const mercadoLibreUrl = 'https://listado.mercadolibre.com.ar/' + spanishName + '?category=MLA11033';
+        const mercadoLibreUrl = 'https://listado.mercadolibre.com.ar/' + spanishName.toLowerCase() + '?category=MLA11033';
         setMercadoLibreUrl(mercadoLibreUrl);
       } catch (error) {
         console.error("Error calling API:", error);
